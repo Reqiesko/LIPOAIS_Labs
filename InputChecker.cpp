@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int InputChecker::numberCheck()
+int InputChecker::NumberCheck()
 {
 	int a;
 	while (!(cin >> a) || (cin.peek() != '\n'))
@@ -14,7 +14,8 @@ int InputChecker::numberCheck()
 	return a;
 }
 
-bool InputChecker::errorCheck() {
+bool InputChecker::ErrorCheck()
+{
 	if (cin.fail())
 	{
 		cin.clear();

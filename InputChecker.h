@@ -5,8 +5,7 @@ using namespace std;
 
 class InputChecker
 {
-    public:
-        int numberCheck();
-        bool errorCheck();
+public:
+	int NumberCheck();
+	bool ErrorCheck();
 };
-

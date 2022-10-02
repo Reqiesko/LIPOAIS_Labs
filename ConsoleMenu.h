@@ -3,18 +3,18 @@
 
 using namespace std;
 
-enum input {
-	keyboard = 1,
-	from_file = 2,
-	info = 3,
-	test = 4,
-	out = 5
+enum Input
+{
+	Keyboard = 1,
+	FromFile = 2,
+	Info = 3,
+	Test = 4,
+	Out = 5
 };
 
 class ConsoleMenu
 {
-    public:
-		void menu();
-		void printGreeting();
+public:
+	void Menu();
+	void PrintGreeting();
 };
-

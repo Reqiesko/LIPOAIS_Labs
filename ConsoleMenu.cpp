@@ -2,12 +2,12 @@
 #include "InputChecker.h"
 #include "TextWorker.h"
 
-void ConsoleMenu::menu()
+void ConsoleMenu::Menu()
 {
 	InputChecker checker;
 	TextWorker worker;
-	int var;
-	while (true) {
+	while (true)
+	{
 		cout << endl;
 		cout << "Меню" << endl;
 		cout << "Выберите вариант: " << endl;
@@ -17,46 +17,55 @@ void ConsoleMenu::menu()
 		cout << "4. Провести тестирование. " << endl;
 		cout << "5. Выйти из программы. " << endl;
 		cout << endl;
-		var = checker.numberCheck();
-		if (!checker.errorCheck()) {
+		const int var = checker.NumberCheck();
+		if (!checker.ErrorCheck())
+		{
 			continue;
 		}
 		cin.ignore(INT_MAX, '\n');
-		switch (var) {
-		case keyboard: {
-			worker.keyboardInput();
-			//worker.getAverage();
-			break;
-		}
-		case from_file: {
-			worker.fileInput();
-			break;
-		}
-		case info: {
-			printGreeting();
-			break;
-		}
-		case test: {
-			//module_tests();
-			//menu();
-			break;
-		}
-		case out: {
-			cout << "Программа завершена." << endl;
-			break;
-		}
-		default: {
-			cout << "Повторите ввод! " << endl;
-		}
+		switch (var)
+		{
+		case Keyboard:
+			{
+				worker.KeyboardInput();
+				//worker.getAverage();
+				break;
+			}
+		case FromFile:
+			{
+				worker.FileInput();
+				break;
+			}
+		case Info:
+			{
+				PrintGreeting();
+				break;
+			}
+		case Test:
+			{
+				//module_tests();
+				//menu();
+				break;
+			}
+		case Out:
+			{
+				cout << "Программа завершена." << endl;
+				break;
+			}
+		default:
+			{
+				cout << "Повторите ввод! " << endl;
+			}
 		}
 		cin.clear();
-		if (var == out) {
+		if (var == Out)
+		{
 			break;
 		}
 	}
 }
 
-void ConsoleMenu::printGreeting()
+void ConsoleMenu::PrintGreeting()
 {
 	system("cls");
 	cout << "Эта программа считает среднее арифметическое значений длин слов в строке. " << endl;
