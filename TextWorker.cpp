@@ -1,13 +1,7 @@
 #include "TextWorker.h"
 #include <filesystem>
-#include <regex>
-#include <iostream>
-#include <algorithm>
-#include <sstream>
-#include <string>
-#include <vector>
-#include <numeric>
-#include <iomanip>
+#include <fstream>
+
 
 using namespace std::filesystem;
 using namespace std;
@@ -49,10 +43,10 @@ void TextWorker::KeyboardInput()
 {
 	cout << "¬вод исходных данных с консоли, дл€ завершени€ ввода нажмите ctrl+x" << endl;
 	getline(cin, this->Text, '\030');
-	int linesCount = count(this->Text.begin(), this->Text.end(), '\n');
+	const int linesCount = ranges::count(this->Text, '\n');
 	auto test = istringstream(this->Text);
 	GetAverage(test, linesCount);
-	auto result = this->ResultAsString();
+	const auto result = this->ResultAsString();
 	cout << result << endl;
 	AskToSaveData(this->Text, "входные данные");
 	AskToSaveData(result, "результат");
@@ -80,8 +74,7 @@ bool TextWorker::IsFilePathGood(string path)
 
 void TextWorker::FileInput()
 {
-	string filePath, lines;
-	int linesCount = 0;
+	string filePath;
 	cout << "”кажите путь к файлу: " << endl;
 	getline(cin, filePath);
 	ifstream fileRead(filePath);
@@ -90,6 +83,8 @@ void TextWorker::FileInput()
 		this->Text.clear();
 		try
 		{
+			int linesCount = 0;
+			string lines;
 			while (getline(fileRead, lines))
 			{
 				this->Text += lines + '\n';
@@ -139,7 +134,7 @@ void TextWorker::SaveData(std::string data)
 {
 	string fileName;
 	ofstream out;
-	if (data == "")
+	if (data.empty())
 	{
 		cout << "ѕустые данные" << endl;
 		return;
@@ -198,9 +193,9 @@ void TextWorker::SaveData(std::string data)
 	}
 }
 
-std::string TextWorker::ResultAsString()
+std::string TextWorker::ResultAsString() const
 {
-	string res = "";
+	string res;
 	for (int i = 0; i < AverageCountOfSym.size(); ++i)
 	{
 		res += std::string(

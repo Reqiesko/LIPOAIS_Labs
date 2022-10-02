@@ -1,7 +1,4 @@
 #pragma once
-#include "InputChecker.h"
-
-using namespace std;
 
 enum Input
 {
@@ -15,6 +12,6 @@ enum Input
 class ConsoleMenu
 {
 public:
-	void Menu();
-	void PrintGreeting();
+	static void Menu();
+	static void PrintGreeting();
 };

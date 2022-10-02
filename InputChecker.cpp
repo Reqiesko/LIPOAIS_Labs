@@ -1,4 +1,6 @@
 #include "InputChecker.h"
+#include <iostream>
+
 
 using namespace std;
 

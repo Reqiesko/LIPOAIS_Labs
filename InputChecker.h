@@ -1,11 +1,8 @@
 #pragma once
-#include <iostream>
-
-using namespace std;
 
 class InputChecker
 {
 public:
-	int NumberCheck();
-	bool ErrorCheck();
+	static int NumberCheck();
+	static bool ErrorCheck();
 };
