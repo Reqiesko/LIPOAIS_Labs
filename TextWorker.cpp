@@ -15,7 +15,6 @@ bool TextWorker::FileExist(const string path) const
 void TextWorker::GetAverage(istream& is, const int n)
 {
 	this->AverageCountOfSym = std::vector<double>(n);
-	//this->result = "";
 	vector<double> avgPerLine;
 	int count = 0;
 	generate_n(back_inserter(avgPerLine), n, [&]()
@@ -29,21 +28,18 @@ void TextWorker::GetAverage(istream& is, const int n)
 		while (words >> line)
 		{
 			wordsCount++;
-			wordsLength += line.length();
+			wordsLength += static_cast<int>(line.length());
 		}
 		this->AverageCountOfSym[count - 1] = (wordsLength * 1.0) / wordsCount;
-		//this->result +=  std::string("\nСреднее арифметическое в строке №" + to_string(count) +  " " + to_string((words_length*1.0) / words_count));
 		return wordsCount ? static_cast<double>(wordsLength) / wordsCount : 0.0;
 	});
-	//cout << this->result;
-	//result= accumulate(avgPerLine.cbegin(), avgPerLine.cend(), 0.0) / avgPerLine.size();
 };
 
 void TextWorker::KeyboardInput()
 {
 	cout << "Ввод исходных данных с консоли, для завершения ввода нажмите ctrl+x" << endl;
 	getline(cin, this->Text, '\030');
-	const int linesCount = ranges::count(this->Text, '\n');
+	const int linesCount = static_cast<int>(ranges::count(this->Text, '\n'));
 	auto test = istringstream(this->Text);
 	GetAverage(test, linesCount);
 	const auto result = this->ResultAsString();
@@ -52,23 +48,17 @@ void TextWorker::KeyboardInput()
 	AskToSaveData(result, "результат");
 }
 
-bool TextWorker::IsFilePathGood(string path)
+bool TextWorker::IsFilePathGood(const string path)
 {
 	const size_t found = path.find_last_of('\\');
 	const size_t point = path.find_last_of('.');
 	const size_t base = point - found - 1;
 	const string baseFilenameStr = path.substr(found + 1, base);
 	const char* baseFilenameChar = baseFilenameStr.c_str();
-	//ofstream file(path, ios::app);
 	if (!_strcmpi(baseFilenameChar, "con"))
 	{
 		return false;
 	}
-	/*if (!filesystem::is_regular_file(path))
-	{
-	    return false;
-	}
-	file.close();*/
 	return true;
 }
 
@@ -153,7 +143,6 @@ void TextWorker::SaveData(std::string data)
 				int variant;
 				while (true)
 				{
-					//getline(cin, variant);
 					cin >> variant;
 					cin.clear();
 					cin.ignore(INT_MAX, '\n');
@@ -181,14 +170,6 @@ void TextWorker::SaveData(std::string data)
 			cout << "Успешно" << endl;
 			return;
 		}
-
-		//out.open(fileName);
-		//if (isFilePathGood(fileName) && out.is_open())
-		//{
-		//    out << data << std::endl;
-		//    cout << "Успешно" << endl;
-		//    break;
-		//}
 		cout << "Невозможно открыть файл" << endl;
 	}
 }
@@ -196,7 +177,7 @@ void TextWorker::SaveData(std::string data)
 std::string TextWorker::ResultAsString() const
 {
 	string res;
-	for (int i = 0; i < AverageCountOfSym.size(); ++i)
+	for (size_t i = 0; i < AverageCountOfSym.size(); ++i)
 	{
 		res += std::string(
 			"\nСреднее арифметическое в строке №" + to_string(i) + " " + to_string(AverageCountOfSym[i]));

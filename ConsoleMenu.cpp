@@ -27,7 +27,6 @@ void ConsoleMenu::Menu()
 		case Keyboard:
 			{
 				worker.KeyboardInput();
-				//worker.getAverage();
 				break;
 			}
 		case FromFile:
@@ -42,8 +41,6 @@ void ConsoleMenu::Menu()
 			}
 		case Test:
 			{
-				//module_tests();
-				//menu();
 				break;
 			}
 		case Out:

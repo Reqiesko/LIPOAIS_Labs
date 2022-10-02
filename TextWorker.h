@@ -15,7 +15,7 @@ class TextWorker
 public:
 	bool FileExist(std::string path) const;
 	void KeyboardInput();
-	static bool IsFilePathGood(std::string filename);
+	static bool IsFilePathGood(std::string path);
 	void FileInput();
 	void GetAverage(std::istream& is, int n);
 	void AskToSaveData(std::string data, std::string nameOfData);
@@ -23,6 +23,5 @@ public:
 	std::string ResultAsString() const;
 private:
 	std::string Text;
-	//std::string result;
 	std::vector<double> AverageCountOfSym;
 };
