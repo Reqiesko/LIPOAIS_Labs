@@ -18,7 +18,8 @@ bool TextWorker::file_exist(string path) {
 }
 
 void TextWorker::getAverage(istream& is, int n) {
-    this->result = "";
+    this->averageCountOfSym = std::vector<double>(n);
+    //this->result = "";
     vector<double> avgPerLine;
     int count = 0;
     generate_n(back_inserter(avgPerLine), n, [&]() {
@@ -33,11 +34,11 @@ void TextWorker::getAverage(istream& is, int n) {
             words_count++;
             words_length += line.length();
         }
-        
-        this->result +=  std::string("\nСреднее арифметическое в строке №" + to_string(count) +  " " + to_string((words_length*1.0) / words_count));
+        this->averageCountOfSym[count - 1] = (words_length * 1.0) / words_count;
+        //this->result +=  std::string("\nСреднее арифметическое в строке №" + to_string(count) +  " " + to_string((words_length*1.0) / words_count));
         return words_count ? static_cast<double>(words_length) / words_count : 0.0;
         });
-    cout << this->result;
+    //cout << this->result;
     //result= accumulate(avgPerLine.cbegin(), avgPerLine.cend(), 0.0) / avgPerLine.size();
 };
 
@@ -48,8 +49,10 @@ void TextWorker::keyboardInput()
     int linesCount = count(this->text.begin(), this->text.end(), '\n');
     auto test = istringstream(this->text);
     getAverage(test, linesCount);
+    auto result = this->resultAsString();
+    cout << result << endl;
     askToSaveData(this->text, "входные данные");
-    askToSaveData(this->result, "результат");
+    askToSaveData(result, "результат");
 }
 
 bool TextWorker::isFilePathGood(string path) {
@@ -92,8 +95,10 @@ void TextWorker::fileInput() {
         catch (string ex) {
             cout << ex << endl; 
         }
+        auto result = this->resultAsString();
+        cout << result << endl;
         askToSaveData(this->text, "входные данные");
-        askToSaveData(this->result, "результат");
+        askToSaveData(result, "результат");
     }
     else {
         cout << "Ошибка!" << endl;
@@ -181,4 +186,14 @@ void TextWorker::saveData(std::string data)
         }
     }
 
+}
+
+std::string TextWorker::resultAsString()
+{
+    string res = "";
+    for (int i = 0; i<averageCountOfSym.size(); ++i) 
+    {
+        res += std::string("\nСреднее арифметическое в строке №" + to_string(i) + " " + to_string(averageCountOfSym[i]));
+    }
+    return res;
 }
