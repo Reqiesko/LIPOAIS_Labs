@@ -21,7 +21,7 @@ public:
 	void AskToSaveData(std::string data, std::string nameOfData);
 	void SaveData(std::string data);
 	std::string ResultAsString() const;
-private:
+//private:
 	std::string Text;
 	std::vector<double> AverageCountOfSym;
 };
