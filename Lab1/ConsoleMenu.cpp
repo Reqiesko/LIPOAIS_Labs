@@ -13,14 +13,9 @@ void ConsoleMenu::Menu()
 		std::cout << "1. Ввести текст с клавиатуры." << std::endl;
 		std::cout << "2. Ввести текст из файла." << std::endl;
 		std::cout << "3. Показать информацию о программе." << std::endl;
-		std::cout << "4. Провести тестирование. " << std::endl;
-		std::cout << "5. Выйти из программы. " << std::endl;
+		std::cout << "4. Выйти из программы. " << std::endl;
 		std::cout << std::endl;
 		const int var = InputChecker::NumberCheck();
-		if (!InputChecker::ErrorCheck())
-		{
-			continue;
-		}
 		std::cin.ignore(INT_MAX, '\n');
 		switch (var)
 		{
@@ -37,10 +32,6 @@ void ConsoleMenu::Menu()
 		case Info:
 			{
 				PrintGreeting();
-				break;
-			}
-		case Test:
-			{
 				break;
 			}
 		case Out:
@@ -68,7 +59,7 @@ void ConsoleMenu::PrintGreeting()
 	std::cout << std::endl;
 	std::cout << "Автор: Нерадовский Артемий" << std::endl;
 	std::cout << "Группа: 494" << std::endl;
-	std::cout << "Лабораторная работа №1" << std::endl;
+	std::cout << "Лабораторная работа #1" << std::endl;
 	std::cout << "Вариант 12" << std::endl;
 	std::cout << std::endl;
 }

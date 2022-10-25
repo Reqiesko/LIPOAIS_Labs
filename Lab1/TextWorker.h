@@ -15,6 +15,8 @@ class TextWorker
 public:
 	bool FileExist(std::string path) const;
 	void KeyboardInput();
+	void GetClearText();
+	int GetLinesCount();
 	static bool IsFilePathGood(std::string path);
 	void FileInput();
 	void GetAverage(std::istream& is, int n);

@@ -39,13 +39,32 @@ void TextWorker::KeyboardInput()
 {
 	cout << "¬вод исходных данных с консоли, дл€ завершени€ ввода нажмите ctrl+x" << endl;
 	getline(cin, this->Text, '\030');
-	const int linesCount = static_cast<int>(ranges::count(this->Text, '\n'));
+	GetClearText();
+	const int linesCount = GetLinesCount();
 	auto test = istringstream(this->Text);
 	GetAverage(test, linesCount);
 	const auto result = this->ResultAsString();
 	cout << result << endl;
 	AskToSaveData(this->Text, "входные данные");
 	AskToSaveData(result, "результат");
+}
+
+void TextWorker::GetClearText() 
+{
+	string chars = ".,!:;@'/#$%^&*";
+	for (char c : chars) {
+		this->Text.erase(std::remove(this->Text.begin(), this->Text.end(), c), this->Text.end());
+	}
+}
+
+int TextWorker::GetLinesCount()
+{
+	int linesCount = static_cast<int>(ranges::count(this->Text, '\n'));
+	if (linesCount == NULL)
+	{
+		linesCount++;
+	}
+	return linesCount;
 }
 
 bool TextWorker::IsFilePathGood(const string path)
